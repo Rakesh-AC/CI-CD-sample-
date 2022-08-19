@@ -3,7 +3,9 @@ version: 2.1
 # add your orb below, to be used in integration tests (note: a @dev:alpha
 # release must exist.);
 orbs:
-  aws-code-deploy: circleci/aws-code-deploy@dev:alpha
+  aws-code-deploy: 
+     circleci orb pack ./src | circleci orb validate -
+     circleci orb pack ./src | circleci orb publish -  ministryofjustice/hmpps@dev:alpha
   aws-cli: circleci/aws-cli@1.4.0
   orb-tools: circleci/orb-tools@10.0.3
 

@@ -18,30 +18,6 @@ parameters:
     type: string
     default: "dev:alpha"
 
-jobs:
-  integration-test-1:
-    docker:
-      - image: cimg/python:3.8
-    steps:
-      - checkout
-      - aws-cli/setup
-      - run:
-          name: Start Instance
-          command: aws ec2 start-instances --instance-ids "$EC2_ID"
-      - aws-code-deploy/push-bundle:
-          application-name: "$APP_NAME"
-          bundle-source: ./sample_app
-          bundle-bucket: "$BUNDLE_BUCKET"
-          bundle-key: "$BUNDLE_KEY"
-      - aws-code-deploy/deploy-bundle:
-          application-name: "$APP_NAME"
-          deployment-group: "$DEPLOYMENT_GROUP_NAME"
-          bundle-bucket: "$BUNDLE_BUCKET"
-          bundle-key: "$BUNDLE_KEY"
-      - run:
-          name: Shutdown Instance
-          command: aws ec2 stop-instances --instance-ids "$EC2_ID"
-
 workflows:
   workflows:
     deploy_application:

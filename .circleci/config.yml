@@ -48,9 +48,9 @@ jobs:
           name: Shutdown Instance
           command: aws ec2 stop-instances --instance-ids "$EC2_ID"
 
-  workflows:
-    deploy_application:
-      jobs:
+workflows:
+  deploy_application:
+    jobs:
         - integration-test-1
 
  
